@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../public/vue.js"></script>
+    <script src="../public/vue-resource.js"></script>
+</head>
+<style>
+    *{
+        padding:0;
+        margin:0;
+        list-style:none;
+    }
+    .content{
+        width:800px;
+        height:100%;
+        margin:100px auto;
+        text-align: center;
+    }
+    .so_input{
+        display: inline-block;
+        width:400px;
+        height:30px;
+        padding:5px;
+    }
+    .select{
+        text-align: left;
+        width:412px;
+        margin:auto;
+    }
+    .select li{
+        width:405px;
+        height:30px;
+        border:1px solid #ddd;
+        border-top:0;
+        line-height:30px;
+        color:deepskyblue;
+        font-size:14px;
+        padding-left:5px;
+        cursor:pointer;
+    }
+    .grad{
+        background: rgba(239, 255, 195, 0.53);
+    }
+</style>
+<body>
+    <div class="content">
+        <input type="text" v-model="str" class="so_input" @keyup="getData($event)" @keydown.up.prevent="addchoss()" @keydown.down="delchoss()" />
+        <ul class="select">
+            <li v-for="value in mydata" :class="{grad:$index==newIndex}" @dblclick="keyword"  @click="values=value">{{value}}</li>
+        </ul>
+    </div>
+</body>
+</html>
+<script>
+    window.onload=function(){
+        new Vue({
+            el:".content",
+            data:{
+                mydata:[],
+                str:"",
+                newIndex:-1,
+                values:""
+            },
+            methods:{
+                getData:function(ev){
+                    if(ev.keyCode==38||ev.keyCode==40){
+                        return;
+                    }
+                    if(ev.keyCode==13){
+                        window.open("https://www.baidu.com/s?wd="+this.str)
+                    }
+                    this.$http.jsonp("https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su",{
+                        wd:this.str
+                    },{jsonp:"cb"}).then(function(res){
+                        this.mydata=res.data.s;
+
+                    },function(){
+                        alert(res.status)
+                    })
+                },
+                addchoss:function(){
+                    this.newIndex++;
+                    if(this.newIndex>=this.mydata.length){
+                        this.newIndex=-1;
+                    }
+                    this.str=this.mydata[this.newIndex]
+                },
+               delchoss:function(){
+                    this.newIndex--;
+                    if(this.newIndex<=0){
+                        this.newIndex=this.mydata.length-1;
+                    }
+                   this.str=this.mydata[this.newIndex]
+               },
+                keyword:function(){
+                    window.open("https://www.baidu.com/s?wd="+this.values)
+                }
+            }
+        })
+    }
+</script>
