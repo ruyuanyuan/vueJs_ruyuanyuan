@@ -1,0 +1,90 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+.content{
+    width:600px;
+    height:auto;
+    padding:10px;
+    border:1px solid #B6E0FA;
+    background: #f3f8fd;
+    margin:50px auto 10px;
+}
+#write{
+    display: inline-block;
+    width:100%;
+}
+.submit{
+    text-align: right;
+    height:40px;
+
+    font-size:14px;
+    color:#999;
+}
+.submit span {
+    display: inline-block;
+    line-height: 40px;
+}
+.upbtn{
+    display: inline-block;
+    width:125px;
+    height: 40px;
+    background:url("../img/takeSbmComment.png") no-repeat 0 0/cover;
+}
+.now{
+    width:600px;
+    height:auto;
+    padding:10px;
+    border:1px solid #B6E0FA;
+    background: #f3f8fd;
+    margin:10px auto;
+}
+.nodata{
+    width:100%;
+    height:30px;
+    border:1px solid #ddd;
+    text-align:center;
+    font-size:14px;
+    line-height:30px;
+    color:#999;
+}
+.datas{
+    width:100%;
+    height:auto;
+}
+.row{
+    width:100%;
+    height:auto;
+    margin-top:10px;
+    border:1px solid #ddd;
+    padding:10px;
+}
+.row .data_contect{
+    font-size:14px;
+    color:#666;
+    line-height: 24px;
+}
+.row .data_new{
+    margin-top:10px;
+    overflow:hidden;
+}
+.row .data_new .times{
+    float:left;
+    color:#999;
+    font-size: 14px;
+}
+.row .data_new  .handle{
+    float:right;
+}
+.row .data_new  .handle a{
+    display: inline-block;
+    text-decoration:none;
+    padding-left:20px;
+    color:#999;
+    font-size:14px;
+    padding-rigth:5px;
+}
+.top{background: url(../img/icons.png) 0 0 no-repeat;}
+.down{background: url(../img/icons.png) 0 -16px no-repeat;}
+.del{background: url(../img/icons.png) 0 -34px no-repeat;}

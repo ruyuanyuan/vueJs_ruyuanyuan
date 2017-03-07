@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
-    <script src="../public/vue.js"></script>
-    <script src="../public/vue-resource.js"></script>
+    <title>Vue.js百度搜索功能</title>
+    <script src="../public/js/vue.js"></script>
+    <script src="../public/js/vue-resource.js"></script>
 </head>
 <style>
     *{
@@ -95,7 +95,9 @@
                    this.str=this.mydata[this.newIndex]
                },
                 keyword:function(){
-                    window.open("https://www.baidu.com/s?wd="+this.values)
+                    this.str="";
+                    window.open("https://www.baidu.com/s?wd="+this.values);
+
                 }
             }
         })

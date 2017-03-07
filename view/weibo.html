@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js微博留言功能</title>
+    <link rel="stylesheet" href="../public/css/weibo.css"/>
+    <script src="../public/js/vue.js"></script>
+    <script src="../public/js/vue-resource.js"></script>
+</head>
+<body>
+    <div class="content">
+        <textarea v-model="text" name="textarea" id="write" rows="6"></textarea>
+        <div class="submit">
+            <span>可按Enter回复</span>
+            <input type="button" class="upbtn" @click="add()"/>
+        </div>
+    </div>
+<div class="now">
+    <div class="nodata" v-show="mydata.length==0">暂无留言</div>
+    <div class="datas">
+            <div class="row" v-for="item in mydata">
+                <p class="data_contect">{{item.content}}</p>
+                <p class="data_new">
+                    <span class="times">{{item.time}}</span>
+                    <span class="handle">
+                        <a href="javascript:;" class="top">{{item.acc}}</a>
+                        <a href="javascript:;" class="down">{{item.ref}}</a>
+                        <a href="javascript:;" class="del">删除</a>
+                    </span>
+                </p>
+            </div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    window.onload=function(){
+        var url="wb.php";
+        new Vue({
+            el:"body",
+            data:{
+                text:"",
+                mydata:[
+                    {
+                        content:"吉萨家是",
+                        time:"2017-03-06",
+                        acc:33,
+                        ref:9
+                    }
+                ]
+            },
+            methods:{
+                add:function(){
+                    this.$http({
+                        url:url,
+                        data:{
+                            act:"add",
+                            content:this.text
+                        }
+                    }).then(function(res){
+                        var json=res.data;
+                        this.mydata.unshift({
+                            content:this.text,
+                            time:json.time,
+                            acc:0,
+                            ref:0,
+                            id:json.id
+                        })
+                        this.text=""
+                    })
+                },
+                getPageData:function(n){
+                    this.http({
+                        url:url,
+                        data:{
+                            act:"get",
+                            page:n
+                        }
+                    }).then(function(res){
+                        console.log(res.data)
+                    })
+                }
+
+            }
+        })
+    }
+</script>
