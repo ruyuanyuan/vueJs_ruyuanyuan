@@ -41,12 +41,6 @@
             data:{
                 text:"",
                 mydata:[
-                    {
-                        content:"吉萨家是",
-                        time:"2017-03-06",
-                        acc:33,
-                        ref:9
-                    }
                 ]
             },
             methods:{
@@ -70,17 +64,28 @@
                     })
                 },
                 getPageData:function(n){
-                    this.http({
+                    this.$http({
                         url:url,
                         data:{
                             act:"get",
                             page:n
                         }
                     }).then(function(res){
-                        console.log(res.data)
+                        var json=res.data;
+                        for(var i=0;i<=json.length;i++){
+                            this.mydata.unshift({
+                                content:json[i].content,
+                                time:json[i].time,
+                                acc:json[i].acc,
+                                ref:json[i].ref
+
+                            })
+                        }
                     })
                 }
-
+            },
+            ready:function(){
+                this.getPageData(1)
             }
         })
     }
